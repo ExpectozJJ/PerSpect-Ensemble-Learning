@@ -17,6 +17,11 @@ Protein-protein interaction complex  -->  PerSpect representation and Feature ge
 Before the representation, the atom coordinates from each protein-protein complex needs to extracted accordingly.  
 
 ## Persistent Spectral (PerSpect) representation and Feature generation
+
+<p align="center">
+  <img src="https://github.com/ExpectozJJ/PerSpect-Ensemble-Learning/blob/master/img/3BN9_PerSpect.png" title="3BN9_PerSpect"/>
+</p>
+
 For each protein-protein complex, the relevant element specific atom groups are used to construct the simplicial complexes to generate the Hodge Laplacians. 
 ```python
 def hodge(args):
