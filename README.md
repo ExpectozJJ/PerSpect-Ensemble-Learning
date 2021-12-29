@@ -13,7 +13,7 @@ This manual is for the code implementation of paper "Persistent spectral based e
 
 # Details about each step
 
-## Protein-protein interaction complex
+## Protein-protein complex
 Before the representation, the atom coordinates from each protein-protein complex needs to extracted accordingly.  
 
 ## Persistent Spectral (PerSpect) representation and Feature generation
