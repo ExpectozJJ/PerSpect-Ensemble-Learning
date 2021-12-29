@@ -28,6 +28,16 @@ def alpha(args):
     # this function generates the eigenvalues from the L1 and L2 hodge laplacians in wild and mutation types from alpha complexes.
     # parameter "args" is foldername format (PDBID, chainid, wildtype, resid, mutanttype) e.g. (1AK4 D A 488 G)
     # Outputs numpy array of features which can be splitted into the L1 and L2 pers
+ 
+def read_eig(args):
+    # this function takes the eigenvalues from "alpha" and "hodge" functions and compute the persistent spectral attributes. 
+    # parameter "args" is foldername format (PDBID, chainid, wildtype, resid, mutanttype) e.g. (1AK4 D A 488 G)
+    # Outputs the persistent attributes in a numpy array after passing through the subfunction "compute_stat"
+
+def compute_stat(dist):
+    # this function takes a distribution of eigenvalues of a particular filtration parameter and computes the persistent spectral attributes. 
+    # Outputs the persistent attributes of that filtration parameter. 
+
 ```
 
 ```python
