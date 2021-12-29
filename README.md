@@ -22,11 +22,18 @@ For each protein-protein complex, the relevant element specific atom groups are 
 def hodge(args):
     # this function generates the eigenvalues from the L0 hodge laplacians in wild and mutation types from Vietoris Rips Complexes. 
     # parameter "args" is foldername format (PDBID, chainid, wildtype, resid, mutanttype) e.g. (1AK4 D A 488 G)
+    # Runs the "binding_hodge.m" and "mutation_hodge.m" to generate the hodge laplacians for each complex. 
     
 def alpha(args):
     # this function generates the eigenvalues from the L1 and L2 hodge laplacians in wild and mutation types from alpha complexes.
     # parameter "args" is foldername format (PDBID, chainid, wildtype, resid, mutanttype) e.g. (1AK4 D A 488 G)
     # Outputs numpy array of features which can be splitted into the L1 and L2 pers
+```
+
+```python
+binding_hodge.m --> Computes L0 Hodge Laplacian by constructing Vietoris Rips Complex from the atom coordinates between the binding sites. 
+mutation_hodge.m --> Computes L0 Hodge Laplacian by constructing Vietoris Rips Complex from the atom coordinates between the mutation site and its neighborhood.
+computeVRcomplex.m --> Constructs the VR complex from atom coordinates.
 ```
 
 # Auxiliary Features Generation
