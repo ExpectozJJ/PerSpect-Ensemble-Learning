@@ -50,6 +50,8 @@ computeVRcomplex.m --> Constructs the VR complex from atom coordinates.
 ---     
         Software: Jackal, PDB2PQR, SPIDER2, MIBPB
         Relevant code and software can be found in https://doi.org/10.24433/CO.0537487.v1. 
+        The auxiliary features for AB-Bind S645 is in models/X_ab_aux.npy.
+        The auxiliary features for SKEMPI-1131 is in models/X_skempi_aux.npy.
 
 ## Base Learner Training
 ---
