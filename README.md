@@ -7,9 +7,9 @@ This manual is for the code implementation of paper "Persistent spectral based e
         Platform: Python>=3.6, MATLAB 2016B
         Python Packages needed: math, numpy>=1.19.5, scipy>=1.4.1, scikit-learn>=0.20.3, GUDHI 3.0.0
         
-# Flow of PerSpect (EL) models
+# Pipeline of PerSpect EL Models
 ---
-Protein-protein interaction complex  -->  PerSpect representation and Feature generation -->  Base Learner Training --> Meta Learner
+![image](https://user-images.githubusercontent.com/32187437/147686016-da8e2f85-7de9-47c1-b7a5-8cabb1a4635b.png)
 
 # Details about each step
 
@@ -17,8 +17,6 @@ Protein-protein interaction complex  -->  PerSpect representation and Feature ge
 Before the representation, the atom coordinates from each protein-protein complex needs to extracted accordingly.  
 
 ## Persistent Spectral (PerSpect) representation and Feature generation
-
-
 
 For each protein-protein complex, the relevant element specific atom groups are used to construct the simplicial complexes to generate the Hodge Laplacians. 
 ```python
