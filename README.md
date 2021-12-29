@@ -40,8 +40,8 @@ def read_eig(args):
 def compute_stat(dist):
     # this function takes a distribution of eigenvalues of a particular filtration parameter and computes the persistent spectral attributes. 
     # Outputs the persistent attributes of that filtration parameter. 
-
 ```
+The above functions can be found in feature/skempi_feature.py and feature/run_all.py.
 
 ```python
 binding_hodge.m --> Computes L0 Hodge Laplacian by constructing Vietoris Rips Complex from the atom coordinates between the binding sites. 
