@@ -47,13 +47,6 @@ mutation_hodge.m --> Computes L0 Hodge Laplacian by constructing Vietoris Rips C
 computeVRcomplex.m --> Constructs the VR complex from atom coordinates.
 ```
 
-# Auxiliary Features Generation
----     
-        Software: Jackal, PDB2PQR, SPIDER2, MIBPB
-        Relevant code and software can be found in https://doi.org/10.24433/CO.0537487.v1. 
-        The auxiliary features for AB-Bind S645 is in models/X_ab_aux.npy.
-        The auxiliary features for SKEMPI-1131 is in models/X_skempi_aux.npy.
-
 ## Base Learner Training
 ---
 Each persistent attribute is put into a base learner (1D-CNN) for training. 
@@ -77,4 +70,11 @@ The outputs from Base Learners are then combined and input into the Meta Learner
   spectnettree_skempi_prelu_v6 --> Meta Learner for SKEMPI 1131
   
   spectnettree_homology_test --> Meta Learner for AB-Bind S645 Blind Homology Test Prediction
+
+# Auxiliary Features
+---     
+        Software: Jackal, PDB2PQR, SPIDER2, MIBPB
+        Relevant code and software can be found in https://doi.org/10.24433/CO.0537487.v1. 
+        The auxiliary features for AB-Bind S645 is in models/X_ab_aux.npy.
+        The auxiliary features for SKEMPI-1131 is in models/X_skempi_aux.npy.
 
