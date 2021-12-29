@@ -4,8 +4,8 @@ This manual is for the code implementation of paper "Persistent spectral based e
 
 # Code Requirements
 ---
-        Platform: Python>=3.6
-        Packages needed: math, numpy>=1.18.1, scipy>=1.4.1, scikit-learn>=0.22.1
+        Platform: Python>=3.6, MATLAB 2016B
+        Python Packages needed: math, numpy>=1.19.5, scipy>=1.4.1, scikit-learn>=0.20.3, GUDHI 3.0.0
         
 # Flow of PerSpect (EL) models
 ---
