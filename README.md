@@ -15,6 +15,7 @@ This manual is for the code implementation of paper "Persistent spectral based e
 
 ## Protein-protein complex
 Before the representation, the atom coordinates from each protein-protein complex needs to extracted accordingly to its element specific combinations e.g. mut_binding_C_C.pts.
+The atom coordinates in *.pts can be generated from the original TopNetTree code 10.24433/CO.0537487.v1.
 
 ## Persistent Spectral (PerSpect) representation and Feature generation
 
