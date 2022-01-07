@@ -62,7 +62,7 @@ def compute_stat(dist):
             feat.append(np.std(dist))                       # persistent std
 
             feat.append(np.sum(np.abs(dist)))               # persistent Laplacian Graph Energy 
-            feat.append(len(dist))                          # persistent number of non-zero eigenvalues
+            #feat.append(len(dist))                          # persistent number of non-zero eigenvalues
             s, t, u, v, w, x, y, z = 0, 0, [], 0, 0, 0, 0, 0
             for l in dist:
                 z += l*l*l*l*l
@@ -78,9 +78,9 @@ def compute_stat(dist):
             feat.append(np.sum(u))                           # persistent Laplacian Generalised Mean Graph Energy
 
             feat.append(w)                                   # persistent spectral 2nd moment
-            feat.append(x)                                   # persistent spectral 3rd moment
-            feat.append(y)                                   # persistent spectral 4th moment
-            feat.append(z)                                   # persistent spectral 5th moment
+            #feat.append(x)                                   # persistent spectral 3rd moment
+            #feat.append(y)                                   # persistent spectral 4th moment
+            #feat.append(z)                                   # persistent spectral 5th moment
             feat.append(t)                                   # persistent zeta(2) of laplacian
             feat.append((len(dist)+1)*v)                     # persistent quasi-Wiener Index
             feat.append(s-math.log(len(dist)+1))             # persistent spanning tree number
