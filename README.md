@@ -81,3 +81,5 @@ The outputs from Base Learners are then combined and input into the Meta Learner
 
 ## Cite
 If you use this code in your research, please considering cite our paper:
+
+* JunJie Wee and Kelin Xia, "Persistent spectral based ensemble learning (PerSpect-EL) for protein-protein binding affinity prediction", Briefings In Bioinformatics, bbac024 (2022)
