@@ -80,6 +80,6 @@ The outputs from Base Learners are then combined and input into the Meta Learner
         The auxiliary features for SKEMPI-1131 is in models/X_skempi_aux.npy.
 
 ## Cite
-If you use this code in your research, please considering cite our paper:
+If you use this code in your research, please cite our paper:
 
 * JunJie Wee and Kelin Xia, "Persistent spectral based ensemble learning (PerSpect-EL) for protein-protein binding affinity prediction", Briefings In Bioinformatics, bbac024 (2022)
