@@ -62,7 +62,7 @@ def compute_stat(dist):
             feat.append(np.std(dist))                       # persistent std
 
             feat.append(np.sum(np.abs(dist)))               # persistent Laplacian Graph Energy 
-            #feat.append(len(dist))                          # persistent number of non-zero eigenvalues
+            feat.append(len(dist))                          # persistent number of non-zero eigenvalues
             s, t, u, v, w, x, y, z = 0, 0, [], 0, 0, 0, 0, 0
             for l in dist:
                 z += l*l*l*l*l
@@ -78,9 +78,9 @@ def compute_stat(dist):
             feat.append(np.sum(u))                           # persistent Laplacian Generalised Mean Graph Energy
 
             feat.append(w)                                   # persistent spectral 2nd moment
-            #feat.append(x)                                   # persistent spectral 3rd moment
-            #feat.append(y)                                   # persistent spectral 4th moment
-            #feat.append(z)                                   # persistent spectral 5th moment
+            feat.append(x)                                   # persistent spectral 3rd moment
+            feat.append(y)                                   # persistent spectral 4th moment
+            feat.append(z)                                   # persistent spectral 5th moment
             feat.append(t)                                   # persistent zeta(2) of laplacian
             feat.append((len(dist)+1)*v)                     # persistent quasi-Wiener Index
             feat.append(s-math.log(len(dist)+1))             # persistent spanning tree number
@@ -433,6 +433,131 @@ def alpha(args):
     
     return np.concatenate((pm1, pm2), axis=0)
 
+def alpha_aux(args):
+    foldername = "./"+args[0] +'_'+args[1]+'_'+args[2]+'_'+args[3]+'_'+args[4]
+    os.system("echo {}".format(foldername))
+
+    pm1, pm2 = [], []
+    os.chdir(foldername+"/binding_PH")
+    for typ in ['mut', 'wild']:
+        C = defaultdict(list)
+        for ele1 in ['C', 'N', 'O']:
+            with open("{}_binding_{}_{}.pts".format(typ, ele1, ele1)) as csvfile:
+                data = np.array(list(csv.reader(csvfile, delimiter=' ', quotechar='|')), dtype=float)
+                csvfile.close()
+
+            if len(data)>0:
+                C[ele1] = data[:, 1:]
+            
+        for e_set in [['C'], ['N'], ['O'], ['C', 'N'], ['C', 'O'], ['N', 'O'], ['C', 'N', 'O']]:
+            Ccloud = C[e_set[0]]
+            for i in range(1, len(e_set)):
+                Ccloud = np.concatenate((Ccloud, C[e_set[i]]), axis=0)
+                
+            #print(typ, e_set, len(Ccloud))
+            #print(typ, e_set, len(Ccloud))
+                
+            alpha_complex = gd.AlphaComplex(Ccloud)
+            st = alpha_complex.create_simplex_tree()
+            dgmsalpha = st.persistence()
+            betti0, betti1, betti2 = [], [], []
+            for r in dgmsalpha:
+                if r[0] == 0:
+                    betti0.append([r[1][0], r[1][1]])
+                elif r[0] == 1:
+                    betti1.append([r[1][0], r[1][1]])
+                elif r[0] == 2:
+                    betti2.append([r[1][0], r[1][1]])
+
+            # Using circumradius, we take sqrt of F and multiply by 2  
+            betti0 = np.array(np.sqrt(betti0)*2)
+            betti1 = np.array(np.sqrt(betti1)*2)
+            betti2 = np.array(np.sqrt(betti2)*2)
+            betti = [betti0, betti1, betti2]
+
+            betti0 = sorted(betti[0], key=lambda x: x[0])
+            betti0 = np.flip(betti0, axis=0)
+            betti1 = sorted(betti[1], key=lambda x: x[0])
+            betti1 = np.flip(betti1, axis=0)
+            betti2 = sorted(betti[2], key=lambda x: x[0])
+            betti2 = np.flip(betti2, axis=0)
+
+            pbn1, pbn2 = np.zeros(80), np.zeros(80)
+            for i in range(10, 90):
+                for j in range(len(betti1)):
+                    if betti1[j][0] <= 0.1*(i) and betti1[j][1] >= 0.1*(i+1):
+                        pbn1[i-10] += 1
+                for j in range(len(betti2)):
+                    if betti2[j][0] <= 0.1*(i) and betti2[j][1] >= 0.1*(i+1):
+                        pbn2[i-10] += 1
+
+            pm1.append(pbn1)
+            pm2.append(pbn2)
+    
+    os.chdir("..")
+    os.chdir("..")
+
+    os.chdir(foldername+"/mutation_PH")
+    for typ in ['mut', 'wild']:
+        C = defaultdict(list)
+        for ele1 in ['C', 'N', 'O']:
+            with open("{}_mutation_{}_{}.pts".format(typ, ele1, ele1)) as csvfile:
+                data = np.array(list(csv.reader(csvfile, delimiter=' ', quotechar='|')), dtype=float)
+                csvfile.close()
+
+            if len(data)>0:
+                C[ele1] = data[:, 1:]
+            
+        for e_set in [['C'], ['N'], ['O'], ['C', 'N'], ['C', 'O'], ['N', 'O'], ['C', 'N', 'O']]:
+            Ccloud = C[e_set[0]]
+            for i in range(1, len(e_set)):
+                Ccloud = np.concatenate((Ccloud, C[e_set[i]]), axis=0)
+                
+            #print(typ, e_set, len(Ccloud))
+            #print(typ, e_set, len(Ccloud))
+                
+            alpha_complex = gd.AlphaComplex(Ccloud)
+            st = alpha_complex.create_simplex_tree()
+            dgmsalpha = st.persistence()
+            betti0, betti1, betti2 = [], [], []
+            for r in dgmsalpha:
+                if r[0] == 0:
+                    betti0.append([r[1][0], r[1][1]])
+                elif r[0] == 1:
+                    betti1.append([r[1][0], r[1][1]])
+                elif r[0] == 2:
+                    betti2.append([r[1][0], r[1][1]])
+
+            # Using circumradius, we take sqrt of F and multiply by 2  
+            betti0 = np.array(np.sqrt(betti0)*2)
+            betti1 = np.array(np.sqrt(betti1)*2)
+            betti2 = np.array(np.sqrt(betti2)*2)
+            betti = [betti0, betti1, betti2]
+
+            betti0 = sorted(betti[0], key=lambda x: x[0])
+            betti0 = np.flip(betti0, axis=0)
+            betti1 = sorted(betti[1], key=lambda x: x[0])
+            betti1 = np.flip(betti1, axis=0)
+            betti2 = sorted(betti[2], key=lambda x: x[0])
+            betti2 = np.flip(betti2, axis=0)
+
+            pbn1, pbn2 = np.zeros(80), np.zeros(80)
+            for i in range(10, 90):
+                for j in range(len(betti1)):
+                    if betti1[j][0] <= 0.1*(i) and betti1[j][1] >= 0.1*(i+1):
+                        pbn1[i-10] += 1
+                for j in range(len(betti2)):
+                    if betti2[j][0] <= 0.1*(i) and betti2[j][1] >= 0.1*(i+1):
+                        pbn2[i-10] += 1
+
+            pm1.append(pbn1)
+            pm2.append(pbn2)
+    
+    os.chdir("..")
+    os.chdir("..")
+    
+    return np.concatenate((pm1, pm2), axis=0)
+
 #j = int(sys.argv[1])
 start, end = int(sys.argv[1]), int(sys.argv[2])
 
@@ -481,13 +606,39 @@ os.chdir("..")
 np.save("X_skempi_l0.npy", np.transpose(np.reshape(feature,(len(feature), 36, 48, 15)), axes=(0,2,1,3)))
 
 """
-os.chdir("./src/feature")
-alpha_feat = []
+feature0, feature1 = [], []
 for i in range(len(args)):
-    alpha_feat.append(alpha(args[i]))
-    print(np.shape(alpha_feat))
+    foldername = "./"+args[i][0] +'_'+args[i][1]+'_'+args[i][2]+'_'+args[i][3]+'_'+args[i][4]
+    os.system("echo {}".format(foldername))
+
+    os.chdir(foldername)
+    feature0.append(alpha(args[i]))
+    print(np.shape(feature))
+    #print(np.shape(op))
+    os.chdir("..")
 
 os.chdir("..")
+feature0 = np.reshape(feature, (len(feature), 112, 80))
+feature0 = np.transpose(feature, axes=(0, 2, 1))
+np.save("X_skempi_alpha_multi.npy", feature)
+
+for i in range(len(args)):
+    foldername = "./"+args[i][0] +'_'+args[i][1]+'_'+args[i][2]+'_'+args[i][3]+'_'+args[i][4]
+    os.system("echo {}".format(foldername))
+
+    os.chdir(foldername)
+    feature1.append(alpha_aux(args[i]))
+    print(np.shape(feature))
+    #print(np.shape(op))
+    os.chdir("..")
+
 os.chdir("..")
-np.save("X_skempi_alpha_l1_l2.npy", np.transpose(alpha_feat, axes=(0, 2, 1)))
+feature1 = np.reshape(feature, (len(feature), 56, 80))
+feature1 = np.transpose(feature, axes=(0, 2, 1))
+np.save("X_skempi_alpha_aux.npy", feature)
+
+alpha_l1 = np.concatenate((feature0[:, :, :28], feature1[:, :, :56]), axis=2)
+alpha_l2 = np.concatenate((feature0[:, :, 28:], feature1[:, :, 56:]), axis=2)
+np.save("X_skempi_alpha_l1.npy", alpha_l1)
+np.save("X_skempi_alpha_l2.npy", alpha_l2)
 """
