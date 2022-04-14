@@ -613,14 +613,14 @@ for i in range(len(args)):
 
     os.chdir(foldername)
     feature0.append(alpha(args[i]))
-    print(np.shape(feature))
+    print(np.shape(feature0))
     #print(np.shape(op))
     os.chdir("..")
 
 os.chdir("..")
-feature0 = np.reshape(feature, (len(feature), 112, 80))
-feature0 = np.transpose(feature, axes=(0, 2, 1))
-np.save("X_skempi_alpha_multi.npy", feature)
+feature0 = np.reshape(feature0, (len(feature0), 112, 80))
+feature0 = np.transpose(feature0, axes=(0, 2, 1))
+np.save("X_skempi_alpha_multi.npy", feature0)
 
 for i in range(len(args)):
     foldername = "./"+args[i][0] +'_'+args[i][1]+'_'+args[i][2]+'_'+args[i][3]+'_'+args[i][4]
@@ -628,14 +628,14 @@ for i in range(len(args)):
 
     os.chdir(foldername)
     feature1.append(alpha_aux(args[i]))
-    print(np.shape(feature))
+    print(np.shape(feature1))
     #print(np.shape(op))
     os.chdir("..")
 
 os.chdir("..")
-feature1 = np.reshape(feature, (len(feature), 56, 80))
-feature1 = np.transpose(feature, axes=(0, 2, 1))
-np.save("X_skempi_alpha_aux.npy", feature)
+feature1 = np.reshape(feature1, (len(feature1), 56, 80))
+feature1 = np.transpose(feature1, axes=(0, 2, 1))
+np.save("X_skempi_alpha_aux.npy", feature1)
 
 alpha_l1 = np.concatenate((feature0[:, :, :28], feature1[:, :, :56]), axis=2)
 alpha_l2 = np.concatenate((feature0[:, :, 28:], feature1[:, :, 56:]), axis=2)
